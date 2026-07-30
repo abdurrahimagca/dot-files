@@ -8,8 +8,12 @@
 -- runtime/autoload/provider/clipboard.vim, it only honours the string form of
 -- g:clipboard when set explicitly.
 --
--- SSH_TTY covers plain ssh. Mosh sets nothing of its own, so .zshrc walks the
--- process tree and exports MOSH_CONNECTION when mosh-server is an ancestor.
-if vim.env.MOSH_CONNECTION or vim.env.SSH_TTY then
-  vim.g.clipboard = "osc52"
-end
+-- Set unconditionally on purpose. Detecting "am I remote?" does not work here:
+-- herdr is a server/client multiplexer whose pane shells are children of the
+-- long-lived server process, so they inherit its ancestry (local Ghostty), not
+-- that of whatever mosh client is currently attached. Env-var and process-tree
+-- probes both fail inside a pane.
+--
+-- Unconditional is fine because OSC 52 works locally too: Ghostty defaults to
+-- clipboard-write = allow, so a local yank still reaches the system clipboard.
+vim.g.clipboard = "osc52"
