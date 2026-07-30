@@ -17,3 +17,14 @@
 -- Unconditional is fine because OSC 52 works locally too: Ghostty defaults to
 -- clipboard-write = allow, so a local yank still reaches the system clipboard.
 vim.g.clipboard = "osc52"
+
+-- LazyVim does `opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"`
+-- (lazyvim/config/options.lua). Over ssh that leaves 'clipboard' empty, so a
+-- plain `y` only fills the unnamed register, never `+`, and the OSC 52 provider
+-- above is never invoked -- yanks silently go nowhere.
+--
+-- lazyvim.config.options is applied AFTER this file, so a plain assignment here
+-- gets overwritten. Defer past startup so ours lands last.
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus"
+end)
