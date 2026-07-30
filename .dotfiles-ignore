@@ -35,3 +35,7 @@ node_modules/
 
 # machine-local secrets
 .zshrc.local
+
+# herdr: runtime state, not config (6MB of logs/sockets)
+.config/herdr/*
+!.config/herdr/config.toml

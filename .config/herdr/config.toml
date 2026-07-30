@@ -1,0 +1,70 @@
+onboarding = false
+[keys]
+prefix = "ctrl+b"
+
+# --- Indexed number jumps (press prefix, then the number) ---
+switch_workspace = "prefix+1..9"   # prefix 1-9        -> focus workspace
+focus_agent = "prefix+shift+1..9"  # prefix shift+1-9  -> focus agent
+switch_tab = "prefix+ctrl+1..9"     # prefix alt+1-9    -> focus tab (kept off plain numbers)
+
+# --- Navigate mode: prefix+g, then PLAIN keys ---
+# While navigate mode is open:
+#   h/j/k/l  move between panes
+#   up/down arrows move between workspaces (built-in)
+#   left/right arrows are permanent aliases for pane-left / pane-right
+goto = "prefix+g"
+navigate_pane_left = "h"
+navigate_pane_down = "j"
+navigate_pane_up = "k"
+navigate_pane_right = "l"
+
+# --- Direct pane focus (one keypress after prefix, no navigate mode) ---
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# --- Workspaces ---
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+workspace_picker = "prefix+w"
+previous_workspace = "prefix+shift+left"
+next_workspace = "prefix+shift+right"
+
+# --- Tabs ---
+new_tab = "prefix+c"
+next_tab = "prefix+n"
+previous_tab = "prefix+p"
+rename_tab = "prefix+shift+t"
+close_tab = "prefix+shift+x"
+
+# --- Splits & panes ---
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"
+close_pane = "prefix+x"
+zoom = "prefix+z"
+resize_mode = "prefix+r"
+
+# --- Misc ---
+detach = "prefix+q"
+toggle_sidebar = "prefix+b"
+copy_mode = "prefix+["
+
+
+[theme]
+name = "nord"
+auto_switch = false
+
+[ui.sound]
+enabled = true
+
+[ui]
+agent_panel_sort = "spaces"
+
+show_agent_labels_on_pane_borders = false
+[experimental]
+pane_history = true
+
+[ui.toast]
+delivery = "system"
