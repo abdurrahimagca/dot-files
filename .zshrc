@@ -3,6 +3,26 @@
 # migrated setup (SSD bun, postgresql@17, ~/.nvm). Old oh-my-zsh file: ~/.zshrc.bck
 
 # ---------------------------------------------------------------------------
+# Mosh detection
+# ---------------------------------------------------------------------------
+# mosh sets no SSH_TTY/SSH_CONNECTION, so nothing downstream can tell it is a
+# remote session. Walk the process tree once and export a marker; nvim reads it
+# to switch its clipboard to OSC 52 (see .config/nvim/lua/config/options.lua).
+if [[ -z $SSH_TTY && -z $MOSH_CONNECTION ]]; then
+  () {
+    local p=$PPID n=0
+    while [[ -n $p && $p != 0 && $p != 1 && $n -lt 12 ]]; do
+      if [[ $(ps -o comm= -p $p 2>/dev/null) == *mosh-server* ]]; then
+        export MOSH_CONNECTION=1
+        return
+      fi
+      p=$(ps -o ppid= -p $p 2>/dev/null | tr -d ' ')
+      (( n++ ))
+    done
+  }
+fi
+
+# ---------------------------------------------------------------------------
 # History
 # ---------------------------------------------------------------------------
 HISTFILE="$HOME/.zsh_history"
