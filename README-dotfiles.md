@@ -44,8 +44,27 @@ by hand.
 `~/.dotfiles-ignore` also blocks `.ssh/`, `.aws/`, `.gnupg/`, `*.pem`,
 `*_history`, `node_modules/` and similar.
 
+## Partially tracked
+
+`~/.config/herdr` holds ~6MB of logs, sockets and session history alongside
+its config. `.dotfiles-ignore` excludes the directory and re-includes only
+`config.toml`. Same pattern works for any app that mixes config with state.
+
 ## Deliberately not tracked
 
-- `~/.config/nvim` — its own git repo, keep it separate
+- `~/.config/sketchybar` — untracked on request; files still on disk
 - `~/.config/opencode` — contains a committed `node_modules`
 - `~/.claude.json` — holds credentials
+
+## nvim history
+
+`~/.config/nvim` used to be its own git repo (7 commits, no remote). It was
+absorbed into this repo, so those commits no longer live in
+`~/.config/nvim/.git`. The full history is preserved at:
+
+    ~/.dotfiles-backups/nvim-history-20260730.bundle
+
+To get it back: `git clone ~/.dotfiles-backups/nvim-history-20260730.bundle nvim-old`
+
+That bundle is outside the work-tree and is NOT itself backed up. Copy it
+somewhere durable if those commits matter.
