@@ -1,0 +1,7 @@
+[user]
+	email = agcaabdurrahim@outlook.com
+	name = Abdurrahim Ağca
+[url "git@github.com:abdurrahimagca/"]
+	insteadOf = https://github.com/abdurrahimagca/
+[coderabbit]
+	machineId = cli/e7a2b693786f4f4c8a01f94dd838a8c9

@@ -1,0 +1,37 @@
+# Safety net for the ~/.dotfiles bare repo.
+# Untracked files are hidden anyway (status.showUntrackedFiles=no),
+# this catches accidental `dot add`s of secrets / junk.
+
+.DS_Store
+*.log
+*.swp
+
+# credentials & keys
+.ssh/
+.gnupg/
+.aws/
+.netrc
+.npmrc
+.pypirc
+*.pem
+*.key
+*_history
+.config/gh/hosts.yml
+.claude.json
+.claude.json.backup
+.claude/**/history.jsonl
+
+# caches / heavy dirs that live in $HOME
+.cache/
+.local/
+node_modules/
+.venv/
+
+# noise picked up on first import
+.config/zed/prompts/
+*.bak
+*.bak.[0-9]*
+*_backup.json
+
+# machine-local secrets
+.zshrc.local
