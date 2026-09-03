@@ -158,3 +158,5 @@ claude --model gpt-5.6-sol --dangerously-skip-permissions'
 
 # YuzuDraw CLI
 export PATH="/Users/apo/.yuzudraw/bin:$PATH"
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
