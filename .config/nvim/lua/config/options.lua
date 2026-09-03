@@ -2,6 +2,10 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+-- Let the terminal own the palette. Nvim's default colorscheme then uses the
+-- terminal's ANSI colors and inherits its foreground/background.
+vim.opt.termguicolors = false
+
 -- Route yanks through OSC 52 when this nvim is being driven from another
 -- machine, so the text lands in *that* machine's clipboard instead of this
 -- box's pbcopy. Nvim never picks OSC 52 on its own -- see
@@ -19,12 +23,24 @@
 vim.g.clipboard = "osc52"
 
 -- LazyVim does `opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"`
--- (lazyvim/config/options.lua). Over ssh that leaves 'clipboard' empty, so a
--- plain `y` only fills the unnamed register, never `+`, and the OSC 52 provider
--- above is never invoked -- yanks silently go nowhere.
+-- and saves that value during startup. It restores the saved value on the
+-- `VeryLazy` event, so vim.schedule() is still too early: the later restore
+-- empties 'clipboard' again in an interactive SSH session.
 --
--- lazyvim.config.options is applied AFTER this file, so a plain assignment here
--- gets overwritten. Defer past startup so ours lands last.
+-- LazyVim registers its VeryLazy handler before loading this file. Registering
+-- ours here and scheduling the assignment makes it run after every handler for
+-- that event, including LazyVim's grouped restore.
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  once = true,
+  callback = function()
+    vim.schedule(function()
+      vim.opt.clipboard = "unnamedplus"
+    end)
+  end,
+})
+
+-- Also cover minimal/headless starts where LazyVim may not emit VeryLazy.
 vim.schedule(function()
   vim.opt.clipboard = "unnamedplus"
 end)
