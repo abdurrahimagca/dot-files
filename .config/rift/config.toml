@@ -1,0 +1,63 @@
+[keys]
+"Alt + Ctrl + M" = "show_mission_control_current"
+"Alt + Ctrl + Shift + M" = "show_mission_control_all"
+"Alt + Ctrl + Space" = "toggle_focus_floating"
+# App shortcuts: open or focus without assigning separate workspaces.
+"Alt + 1" = { exec = ["/usr/bin/open", "-b", "com.mitchellh.ghostty"] }
+"Alt + 2" = { exec = ["/usr/bin/open", "-b", "com.vivaldi.Vivaldi"] }
+"Alt + F" = "toggle_fullscreen"
+"Alt + Shift + F" = "toggle_fullscreen_within_gaps"
+"Alt + Equal" = { resize_window_grow = "horizontal" }
+"Alt + Minus" = { resize_window_shrink = "horizontal" }
+"Alt + Z" = "toggle_space_activated"
+"Alt + H" = { move_focus = "left" }
+"Alt + J" = { move_focus = "down" }
+"Alt + K" = { move_focus = "up" }
+"Alt + L" = { move_focus = "right" }
+"Alt + Shift + H" = { move_node = "left" }
+"Alt + Shift + J" = { move_node = "down" }
+"Alt + Shift + K" = { move_node = "up" }
+"Alt + Shift + L" = { move_node = "right" }
+"Alt + Shift + Space" = "toggle_window_floating"
+
+
+[settings]
+# Focus with clicks or keyboard shortcuts; keep the pointer stationary.
+focus_follows_mouse = false
+mouse_follows_focus = false
+mouse_hides_on_focus = false
+animate = true
+animation_duration = 0.18
+animation_fps = 100.0
+animation_easing = "ease_out_cubic"
+hot_reload = true
+
+[settings.layout]
+mode = "scrolling"
+
+[settings.layout.scrolling]
+column_width_ratio = 0.7
+alignment = "center"
+focus_navigation_style = "niri"
+
+
+[settings.layout.gaps.outer]
+top = 8.0
+left = 8.0
+bottom = 8.0
+right = 8.0
+
+[settings.layout.gaps.inner]
+horizontal = 8.0
+vertical = 8.0
+
+[settings.ui.menu_bar]
+enabled = true
+show_empty = false
+mode = "all"
+display_style = "layout"
+
+[settings.ui.mission_control]
+enabled = true
+fade_enabled = true
+fade_duration_ms = 180.0
